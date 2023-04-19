@@ -15,3 +15,5 @@ Only 22
 From 23 to 24
 ## Day 7: 2023-04-03
 From 25 to 27
+## Day 8: 2023-04-19
+OZON git
