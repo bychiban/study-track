@@ -31,6 +31,6 @@ func (this *SmallestInfiniteSet) PopSmallest() int {
 
 func (this *SmallestInfiniteSet) AddBack(num int) {
 	if isExcluded, ok := this.excludedSet[num]; ok && isExcluded {
-		delete(this.excludedSet, num)
+		this.excludedSet[num] = false
 	}
 }
