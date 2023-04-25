@@ -673,3 +673,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Temp folder
+.temp/*
