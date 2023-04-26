@@ -5,24 +5,61 @@ import (
 )
 
 func main() {
-	fmt.Println(numTrees(19))
+	printTrees(generateTrees(2))
 }
 
-func numTrees(n int) int {
-	var hashMap map[int]int = make(map[int]int, 0)
-	hashMap[0] = 1
-	hashMap[1] = 1
-	return numTreesCalc(n, &hashMap)
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func numTreesCalc(n int, results *map[int]int) int {
-	if value, ok := (*results)[n]; ok {
-		return value
+func generateTrees(n int) []*TreeNode {
+	list := make([]int, n)
+	for i := 0; i < n; i++ {
+		list[i] = i + 1
 	}
-	sum := 0
-	for i := 1; i <= n; i++ {
-		sum = sum + numTreesCalc(i-1, results)*numTreesCalc(n-i, results)
+	return generateTreesCalc(list)
+}
+
+func generateTreesCalc(list []int) []*TreeNode {
+	length := len(list)
+	if length == 0 {
+		return []*TreeNode{nil}
 	}
-	(*results)[n] = sum
-	return sum
+	if length == 1 {
+		return []*TreeNode{{Val: list[0]}}
+	}
+	result := []*TreeNode{}
+	for i := 0; i < length; i++ {
+		leftBranches := generateTreesCalc(list[:i])
+		rightBranches := generateTreesCalc(list[i+1 : length])
+		for _, leftBranch := range leftBranches {
+			for _, rightBranch := range rightBranches {
+				current := &TreeNode{Val: list[i], Left: leftBranch, Right: rightBranch}
+				result = append(result, current)
+			}
+		}
+	}
+	return result
+}
+
+func printTrees(trees []*TreeNode) {
+	fmt.Print("[")
+	for _, tree := range trees {
+		fmt.Print("[")
+		printTree(tree)
+		fmt.Print("], ")
+	}
+	fmt.Println("]")
+}
+
+func printTree(node *TreeNode) {
+	if node == nil {
+		fmt.Print(node, ", ")
+		return
+	}
+	fmt.Print(node.Val, ", ")
+	printTree(node.Left)
+	printTree(node.Right)
 }
