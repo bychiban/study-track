@@ -38,10 +38,6 @@ func Search(nums []int, target int) int {
 			return m
 		}
 	}
-	if left >= right {
-		return left
-	} else if len(nums) == 0 || nums[0] > target {
-		return 0
-	}
-	return 1
+
+	return left
 }
