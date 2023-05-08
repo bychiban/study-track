@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	fmt.Println(longestObstacleCourseAtEachPosition([]int{5, 1, 5, 5, 1, 3, 4, 5, 1, 4}))
+	fmt.Println(longestObstacleCourseAtEachPosition([]int{3, 1, 5, 6, 4, 2}))
 }
 
 func longestObstacleCourseAtEachPosition(obstacles []int) []int {
@@ -14,9 +14,10 @@ func longestObstacleCourseAtEachPosition(obstacles []int) []int {
 
 	for i := 0; i < len(obstacles); i++ {
 		idx := searchInsert(subseq, obstacles[i])
-		if idx == len(subseq) {
+		if idx == len(obstacles) {
 			subseq = append(subseq, obstacles[i])
 		} else {
+			subseq = append(subseq[:idx], subseq[idx+1:len(subseq)]...)
 			subseq[idx] = obstacles[i]
 		}
 		result[i] = idx + 1
@@ -41,6 +42,7 @@ func searchInsert(nums []int, target int) int {
 	return left
 }
 
+// comment
 func longestObstacleCourseAtEachPositionStupid(obstacles []int) []int {
 	result := make([]int, len(obstacles))
 
