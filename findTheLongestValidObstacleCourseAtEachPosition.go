@@ -42,7 +42,6 @@ func searchInsert(nums []int, target int) int {
 	return left
 }
 
-// comment
 func longestObstacleCourseAtEachPositionStupid(obstacles []int) []int {
 	result := make([]int, len(obstacles))
 
