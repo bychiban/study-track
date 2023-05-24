@@ -9,6 +9,9 @@ namespace LeetCode
     {
         public static async Task Main(string[] args)
         {
+            var solution = new Solution();
+            Console.WriteLine(solution.MaxScore(new int[]{1,3,3,2},new int[]{2,1,3,4},3));
+
             var foo = new PrintInOrder();
             var tasks = new List<Task> {
                 Task.Run(() => foo.First(() => {
